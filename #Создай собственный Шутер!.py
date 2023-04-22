@@ -15,6 +15,10 @@ class GameSprite(sprite.Sprite):
         if keys[K_LEFT] and self.rect.x > 5:
             self.rect.x -= self.speed
         if keys[K_RIGHT] and self.rect.x < win_width - 85:
+            self.rect.x += self.speed
+        if keys[K_UP] and self.rect.x > 5:
+            self.rect.x -= self.speed
+        if keys[K_DOWN] and self.rect.x < win_width - 85:
             self.rect.x += self.speed'''
 
 class Enemy(GameSprite):
@@ -33,6 +37,8 @@ clock = time.Clock()
 FPS = 60
 window.fill(blue)
 
+player1 = Player()
+player2 = Player()
 ball = Enemy()
 
 game = True
