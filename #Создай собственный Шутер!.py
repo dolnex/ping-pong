@@ -27,12 +27,17 @@ class Player2(GameSprite):
             self.rect.y += self.speed
 
 
+speed_x = 3
+speed_y = 3
 class Enemy(GameSprite):
     def update(self):
-        '''self.rect.y += self.speed
-        if self.rect.y > 500:
-            self.rect.x = randint(80, 620)
-            self.rect.y = 0'''
+        global speed_y
+        global speed_x
+        if ball.rect.y > win_height - 50 or ball.rect.y < 0:
+            speed_y *= -1
+        if sprite.collide_rect(ball,player1) or sprite.collide_rect(ball,player2):
+            speed_x *= -1
+
 
 blue = (200,255,255)
 win_width = 700
@@ -63,6 +68,8 @@ while game:
         player2.update()
         ball.reset()
         ball.update()
+        ball.rect.x += speed_x
+        ball.rect.y += speed_y
 
 
 
