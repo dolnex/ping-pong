@@ -15,7 +15,7 @@ class Player(GameSprite):
     def update(self):
         if keys[K_UP] and self.rect.x > 5:
             self.rect.y -= self.speed
-        if keys[K_DOWN] and self.rect.y < win_width - 600:
+        if keys[K_DOWN] and self.rect.y < win_width - 300:
             self.rect.y += self.speed        
 
         
@@ -23,16 +23,21 @@ class Player2(GameSprite):
     def update(self):
         if keys[K_w] and self.rect.x > 5:
             self.rect.y -= self.speed
-        if keys[K_s] and self.rect.y < win_width - 600:
+        if keys[K_s] and self.rect.y < win_width - 300:
             self.rect.y += self.speed
 
 
+speed_x = 3
+speed_y = 3
 class Enemy(GameSprite):
     def update(self):
-        '''self.rect.y += self.speed
-        if self.rect.y > 500:
-            self.rect.x = randint(80, 620)
-            self.rect.y = 0'''
+        global speed_y
+        global speed_x
+        if ball.rect.y > win_height - 50 or ball.rect.y < 0:
+            speed_y *= -1
+        if sprite.collide_rect(ball,player1) or sprite.collide_rect(ball,player2):
+            speed_x *= -1
+
 
 blue = (200,255,255)
 win_width = 700
@@ -43,9 +48,9 @@ clock = time.Clock()
 FPS = 60
 
 
-player1 = Player('platform.png',10,50,4,20,500)
-player2 = Player2('platform.png',660,50,4,20,500)
-ball = Enemy('ball.png',100,200,4,140,80)
+player1 = Player('platform_.png',10,50,4,20,100)
+player2 = Player2('platform_.png',660,50,4,20,100)
+ball = Enemy('ball.png',100,200,4,100,90)
 
 run = False
 game = True
@@ -63,6 +68,8 @@ while game:
         player2.update()
         ball.reset()
         ball.update()
+        ball.rect.x += speed_x
+        ball.rect.y += speed_y
 
 
 
